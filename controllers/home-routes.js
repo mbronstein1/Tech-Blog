@@ -1,18 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
-const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
-
-//Handlebars custom helper function for comparison operator
-hbs.handlebars.registerHelper('ifEqual', function (v1, v2, options) {
-    if (v1 === v2) {
-        // console.log(options.fn(this))
-        return options.fn(this)
-    } else {
-        // console.log(options.inverse(this))
-        return options.inverse(this)
-    }
-})
+const { User, Post, Comment } = require('../models');
 
 //GET route for homepage
 router.get('/', async (req, res) => {
@@ -25,7 +12,6 @@ router.get('/', async (req, res) => {
             ],
         })
         const posts = dbPostData.map((post) => post.get({ plain: true }));
-        // console.log(posts)
         res.render('home', {
             posts,
             isLoggedIn: req.session.loggedIn
@@ -39,17 +25,28 @@ router.get('/', async (req, res) => {
 //GET route for dashboard
 router.get('/dashboard', (req, res) => {
     res.render('dashboard', {
+        layout: 'dashboard',
         isLoggedIn: req.session.loggedIn
     })
 });
 
 //GET route for login page
-router.get('/login', (res, req) => {
+router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
+    } else {
+        res.render('login');
     }
-    res.render('login');
-})
+});
+
+router.get('/signup', (req, res) => {
+    if(req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    } else {
+        res.render('signup')
+    }
+});
 
 module.exports = router;
