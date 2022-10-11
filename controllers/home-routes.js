@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
 
 //Handlebars custom helper function for comparison operator
-hbs.handlebars.registerHelper('ifCond', function (v1, v2, options) {
+hbs.handlebars.registerHelper('ifEqual', function (v1, v2, options) {
     if (v1 === v2) {
         // console.log(options.fn(this))
         return options.fn(this)

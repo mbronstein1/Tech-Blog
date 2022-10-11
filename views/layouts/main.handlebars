@@ -46,11 +46,11 @@
             </div>
             <header>
                 <h1 class="header-title">
-                    {{#ifCond window.location.pathname '/dashboard'}}<!--ASK ABOUT HOW TO DO COMPARISON OPERATORS-->
+                    {{#ifEqual window.location.pathname '/dashboard'}}<!--ASK ABOUT HOW TO DO COMPARISON OPERATORS-->
                     Your Dashboard
                     {{else}}
                     The Tech Blog
-                    {{/ifCond}}
+                    {{/ifEqual}}
                 </h1>
             </header>
         </div>
