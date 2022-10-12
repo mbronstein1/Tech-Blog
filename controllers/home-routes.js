@@ -24,9 +24,23 @@ router.get('/', async (req, res) => {
 });
 
 //GET route for dashboard
-router.get('/dashboard', withAuth, (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
+    const userPostData = await Post.findAll({
+        include: [
+            {
+                model: User
+            }
+        ],
+        where: {
+            user_id: req.session.user_id
+        }
+    });
+    const userPosts = userPostData.map((post) => post.get({ plain: true }));
+    console.log(req.session)
+    console.log(userPosts);
     res.render('dashboard', {
-        layout: 'dashboard',
+        layout: 'dashboard-main',
+        userPosts,
         isLoggedIn: req.session.loggedIn
     })
 });

@@ -10,6 +10,7 @@ router.post('/signup', async (req, res) => {
         });
 
         req.session.save(() => {
+            req.session.user_id = dbUserData.id
             req.session.loggedIn = true;
 
             res.status(200).json(dbUserData)
@@ -44,6 +45,7 @@ router.post('/login', async (req, res) => {
 
         //Approve authorization, store session, and create cookie
         req.session.save(() => {
+            req.session.user_id = dbUserData.id;
             req.session.loggedIn = true;
             console.log("Cookie:", req.session.cookie);
             res.status(200).json({
