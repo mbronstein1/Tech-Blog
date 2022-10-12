@@ -27,6 +27,4 @@ const loginFormHandler = async (e) => {
     }
 };
 
-
-
 loginFormEl.addEventListener('submit', loginFormHandler);
