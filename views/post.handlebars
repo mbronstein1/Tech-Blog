@@ -10,7 +10,7 @@
   </div>
 </div>
 
-{{#each post.comments as |comments|}}
+{{#each comment as |comments|}}
 <div class="card m-5">
   <div class="card-body">
     <p class="card-text">{{comments}}</p>
@@ -20,7 +20,7 @@
 {{/each}}
 
 
-<form class="m-5">
+<form class="m-5" id="comment-form">
   <div class="form-group">
     <label for="comment">Comment</label>
     <textarea name="comment" class="form-control" id="comment"></textarea>
@@ -29,3 +29,5 @@
     <button type="submit" class="btn btn-primary">Submit comment</button>
   </div>
 </form>
+
+<script src="../js/comment.js"></script>
