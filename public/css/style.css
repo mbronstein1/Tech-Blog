@@ -1,3 +1,7 @@
 #new-post-card {
     display: none;
 }
+
+.post-cards:hover {
+    cursor: pointer;
+}
