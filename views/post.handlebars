@@ -1,0 +1,31 @@
+<div class="card m-5">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="card-title">{{post.title}}</h4>
+    <p>
+      Posted by {{post.user.username}} on {{format_date post.date_created}}
+    </p>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{post.text}}</p>
+  </div>
+</div>
+
+{{#each post.comments as |comments|}}
+<div class="card m-5">
+  <div class="card-body">
+    <p class="card-text">{{comments}}</p>
+     <p class="card-text">--{{user.username}} on {{format_date date_created}}</p>
+  </div>
+</div>
+{{/each}}
+
+
+<form class="m-5">
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea name="comment" class="form-control" id="comment"></textarea>
+  </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Submit comment</button>
+  </div>
+</form>

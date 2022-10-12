@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
+const withAuth = require('../utils/auth')
 
 //GET route for homepage
 router.get('/', async (req, res) => {
@@ -10,12 +11,12 @@ router.get('/', async (req, res) => {
                     model: User
                 },
             ],
-        })
+        });
         const posts = dbPostData.map((post) => post.get({ plain: true }));
         res.render('home', {
             posts,
             isLoggedIn: req.session.loggedIn
-        })
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -23,7 +24,7 @@ router.get('/', async (req, res) => {
 });
 
 //GET route for dashboard
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', withAuth, (req, res) => {
     res.render('dashboard', {
         layout: 'dashboard',
         isLoggedIn: req.session.loggedIn
@@ -40,6 +41,7 @@ router.get('/login', (req, res) => {
     }
 });
 
+//GET route for signup page
 router.get('/signup', (req, res) => {
     if(req.session.loggedIn) {
         res.redirect('/');
@@ -48,5 +50,29 @@ router.get('/signup', (req, res) => {
         res.render('signup')
     }
 });
+
+//GET route for ONE post
+router.get('/post/:id', /*withAuth,*/ async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User
+                },
+                {
+                    model: Comment
+                }
+            ]
+        });
+        const post = postData.get({ plain: true })
+        console.log(post);
+        res.render('post', {
+            post,
+            isLoggedIn: req.session.loggedIn
+        })
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 
 module.exports = router;
