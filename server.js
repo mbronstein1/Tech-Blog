@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-    secret: 'this is super duper secret',
+    secret: process.env.SECRET_PASSWORD,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24, //expires after 24 hours
     },
