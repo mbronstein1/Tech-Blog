@@ -1,4 +1,4 @@
-# Tech-Blog-Challenge-14
+# Tech Blog
 
 ## Description
 This is the fourteenth challenge in the Northwestern Coding Bootcamp (Module 14). We were expected to use everything we have learned so far to create a full-stack application from scratch, in the form of a tech blog. We used many npm packages including bcrypt, connect-session-sequelize, dotenv, express, express-handlebars, express-session, handlebars, mysql2, and sequelize. The project was a huge undertaking, and, while I was not able to complete all of the acceptance criteria, I was able to check off a great deal of the LONG criteria, all by myself from scratch. Other students were given some starter code from the instructors, but I did not use that resource. I will continue to work on it as time goes on and will be able to reference it often for future projects.
